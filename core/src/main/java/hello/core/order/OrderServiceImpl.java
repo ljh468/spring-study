@@ -4,10 +4,12 @@ import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemberService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor // final이 붙은 인스턴스 변수를 파라미터로 받는 생성자를 생성
 public class OrderServiceImpl implements OrderService {
 
   // private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
@@ -15,9 +17,9 @@ public class OrderServiceImpl implements OrderService {
 
 
   // 인터페이스에만 의존 (DIP 원칙 ok.!!)
-  private MemberRepository memberRepository;
+  private final MemberRepository memberRepository;
 
-  private DiscountPolicy discountPolicy;
+  private final DiscountPolicy discountPolicy;
 
   // 필드 주입 (외부에서 사용하기 어렵기때문에 사용하지 말것, 테스트시에만 사용)
   // @Autowired private MemberRepository memberRepository;
@@ -25,11 +27,11 @@ public class OrderServiceImpl implements OrderService {
 
 
   // 생성자 주입
-  @Autowired
-  public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-    this.memberRepository = memberRepository;
-    this.discountPolicy = discountPolicy;
-  }
+  // @Autowired
+  // public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+  //   this.memberRepository = memberRepository;
+  //   this.discountPolicy = discountPolicy;
+  // }
 
   // setter 주입
   // @Autowired(required = false) // 선택적으로 가능 (필수가 아니라는 설정)
