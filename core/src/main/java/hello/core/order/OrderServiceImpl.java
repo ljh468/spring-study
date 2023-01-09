@@ -6,10 +6,11 @@ import hello.core.member.MemberRepository;
 import hello.core.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor // final이 붙은 인스턴스 변수를 파라미터로 받는 생성자를 생성
+// @RequiredArgsConstructor // final이 붙은 인스턴스 변수를 파라미터로 받는 생성자를 생성
 public class OrderServiceImpl implements OrderService {
 
   // private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
@@ -27,11 +28,11 @@ public class OrderServiceImpl implements OrderService {
 
 
   // 생성자 주입
-  // @Autowired
-  // public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-  //   this.memberRepository = memberRepository;
-  //   this.discountPolicy = discountPolicy;
-  // }
+  @Autowired
+  public OrderServiceImpl(MemberRepository memberRepository, @Qualifier("mainDiscountPolicy") DiscountPolicy discountPolicy) {
+    this.memberRepository = memberRepository;
+    this.discountPolicy = discountPolicy;
+  }
 
   // setter 주입
   // @Autowired(required = false) // 선택적으로 가능 (필수가 아니라는 설정)
