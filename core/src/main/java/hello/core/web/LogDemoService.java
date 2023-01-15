@@ -11,12 +11,13 @@ import javax.inject.Provider;
 public class LogDemoService {
 
   // request scope 이기때문에 MyLogger Bean은 찾을 수가 없다.
-  // private final MyLogger myLogger;
+  // proxyMode를 이용 할 수 있다.
+  private final MyLogger myLogger;
 
-  private final Provider<MyLogger> myLoggerProvider;
+  // private final Provider<MyLogger> myLoggerProvider;
 
   public void logic(String id) {
-    MyLogger myLogger = myLoggerProvider.get();
+    // MyLogger myLogger = myLoggerProvider.get();
     myLogger.log("service id : " + id);
   }
 }
