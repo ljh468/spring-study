@@ -12,10 +12,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-@WebServlet(name = "MemberListServlet", urlPatterns = "/servlet/members")
+@WebServlet(name = "memberListServlet", urlPatterns = "/servlet/members")
 public class MemberListServlet extends HttpServlet {
 
-  private MemberRepository memberRepository = MemberRepository.getInstance();
+  private final MemberRepository memberRepository = MemberRepository.getInstance();
 
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "MemberFormServlet", urlPatterns = "/servlet/members/new-form")
+@WebServlet(name = "memberFormServlet", urlPatterns = "/servlet/members/new-form")
 public class MemberFormServlet extends HttpServlet {
 
-  private MemberRepository memberRepository = MemberRepository.getInstance();
+  private final MemberRepository memberRepository = MemberRepository.getInstance();
 
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
