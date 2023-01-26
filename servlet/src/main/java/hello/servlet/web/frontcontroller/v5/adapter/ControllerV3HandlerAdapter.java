@@ -15,6 +15,7 @@ public class ControllerV3HandlerAdapter implements MyHandlerAdapter {
 
   @Override
   public boolean supports(Object handler) {
+    // MemberFormControllerV3
     return (handler instanceof ControllerV3);
   }
 
