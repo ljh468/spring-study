@@ -18,11 +18,14 @@
 <!-- 자바스크립트 인라인 사용 후 -->
 <script th:inline="javascript">
   var username = [[${user.username}]];
+  console.log(username);
   var age = [[${user.age}]];
+  console.log(age)
   //자바스크립트 내추럴 템플릿
   var username2 = /*[[${user.username}]]*/ "test username";
   //객체
   var user = [[${user}]];
+  console.log(user);
 </script>
 
 </body>
