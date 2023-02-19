@@ -42,7 +42,7 @@ public class ErrorPageController {
     log.info("ERROR_REQUEST_URI: {}", request.getAttribute(ERROR_REQUEST_URI)); // 클라이언트 요청 URI
     log.info("ERROR_SERVLET_NAME: {}", request.getAttribute(ERROR_SERVLET_NAME)); // 오류가 발생한 서블릿 이름
     log.info("ERROR_STATUS_CODE: {}", request.getAttribute(ERROR_STATUS_CODE)); // HTTP 상태코드
-    log.info("dispatchType={}", request.getDispatcherType()); 
+    log.info("dispatchType={}", request.getDispatcherType());
   }
 
 }
