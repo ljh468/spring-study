@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @Slf4j
-@RestControllerAdvice
+@RestControllerAdvice(basePackages = "hello.exception.api") // 패키지 저장 가능 ex : "org.example.controllers"
 public class ExControllerAdvice {
 
   @ResponseStatus(HttpStatus.BAD_REQUEST)
