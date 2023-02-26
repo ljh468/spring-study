@@ -4,6 +4,7 @@ import hello.jdbc.domain.Member;
 import hello.jdbc.repository.MemberRepositoryV3;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.*;
+import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -63,6 +64,16 @@ class MemberServiceV3_3Test {
     memberRepository.delete(MEMBER_A);
     memberRepository.delete(MEMBER_B);
     memberRepository.delete(MEMBER_EX);
+  }
+
+  @Test
+  @DisplayName("트랜잭션 프록시 확인")
+  @Order(0)
+  void AopCheck() {
+    log.info("memberService class={}", memberService.getClass());
+    log.info("memberRepository class={}", memberRepository.getClass());
+    assertThat(AopUtils.isAopProxy(memberService)).isTrue();
+    assertThat(AopUtils.isAopProxy(memberRepository)).isFalse();
   }
 
   @Test
