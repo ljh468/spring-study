@@ -58,7 +58,8 @@ class MemberServiceV4_Test {
     @Bean
     MemberRepository memberRepository() {
       //return new MemberRepositoryV4_1(dataSource); //단순 예외 변환
-      return new MemberRepositoryV5(dataSource); //스프링 예외 변환
+      // return new MemberRepositoryV4_2(dataSource); //스프링 예외 변환
+      return new MemberRepositoryV5(dataSource);
     }
 
     @Bean
