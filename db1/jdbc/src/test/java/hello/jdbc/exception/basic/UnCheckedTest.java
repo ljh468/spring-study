@@ -43,7 +43,7 @@ public class UnCheckedTest {
       try {
         repository.call();
       } catch (MyUncheckedException e) {
-        //예외 처리 로직
+        // 예외 처리 로직
         log.info("예외 처리, message={}", e.getMessage(), e);
       }
     }
