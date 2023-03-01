@@ -36,6 +36,7 @@ public class CheckedTest {
    */
   static class Service {
     Repository repository = new Repository();
+
     /**
      * 예외를 잡아서 처리하는 코드
      */
