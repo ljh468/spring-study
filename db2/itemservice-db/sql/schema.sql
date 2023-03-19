@@ -7,3 +7,5 @@ create table item
     quantity  integer,
     primary key (id)
 );
+
+insert into item(item_name, price, quantity) values ('ItemTest', 10000, 10)
