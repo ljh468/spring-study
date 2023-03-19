@@ -5,7 +5,5 @@ create table item
     item_name varchar(10),
     price     integer,
     quantity  integer,
-    primary key (id)
+primary key (id)
 );
-
-insert into item(item_name, price, quantity) values ('ItemTest', 10000, 10)
