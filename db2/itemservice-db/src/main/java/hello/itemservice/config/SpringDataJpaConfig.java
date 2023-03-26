@@ -2,21 +2,21 @@ package hello.itemservice.config;
 
 import hello.itemservice.repository.ItemRepository;
 import hello.itemservice.repository.jpa.JpaItemRepositoryV1;
+import hello.itemservice.repository.jpa.JpaItemRepositoryV2;
+import hello.itemservice.repository.jpa.SpringDataJpaItemRepository;
 import hello.itemservice.service.ItemService;
 import hello.itemservice.service.ItemServiceV1;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.EntityManager;
 
 @Configuration
-public class JpaConfig {
+@RequiredArgsConstructor
+public class SpringDataJpaConfig {
 
-  private final EntityManager entityManager;
-
-  public JpaConfig(EntityManager entityManager) {
-    this.entityManager = entityManager;
-  }
+  private final SpringDataJpaItemRepository springDataJpaItemRepository;
 
   @Bean
   public ItemService itemService() {
@@ -25,6 +25,6 @@ public class JpaConfig {
 
   @Bean
   public ItemRepository itemRepository() {
-    return new JpaItemRepositoryV1(entityManager);
+    return new JpaItemRepositoryV2(springDataJpaItemRepository);
   }
 }
