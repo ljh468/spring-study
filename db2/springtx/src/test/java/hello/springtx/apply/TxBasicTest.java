@@ -16,6 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 public class TxBasicTest {
 
+    //@Transactional 이 하나라도 있으면 BasicService 는 프록시 객체가 생성되서 주입됨
     @Autowired
     BasicService basicService;
 
