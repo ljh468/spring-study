@@ -133,7 +133,7 @@ public class BasicTxText {
         log.info("내부 트랜잭션 시작");
         DefaultTransactionAttribute definition = new DefaultTransactionAttribute();
         definition.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW); // 무조건 새로운 트랜잭션 생성
-        // definition.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED); // 기존 트랜잭션에 없으면 생성, 있으면 참여
+        // definition.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED); // 기존 트랜잭션에 없으면 생성, 있으면 참여 (기본 옵션)
         // definition.setPropagationBehavior(TransactionDefinition.PROPAGATION_SUPPORTS); // 기존 트랜잭션이 없으면 진행, 있으면 참여
         // definition.setPropagationBehavior(TransactionDefinition.PROPAGATION_NOT_SUPPORTED); // 트랜잭션 지원 X
         // definition.setPropagationBehavior(TransactionDefinition.PROPAGATION_MANDATORY); // 기존 트랜잭션이 없으면 예외, 있으면 참여
