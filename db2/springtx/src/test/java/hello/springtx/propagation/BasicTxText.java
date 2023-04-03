@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.UnexpectedRollbackException;
 import org.springframework.transaction.interceptor.DefaultTransactionAttribute;
@@ -121,6 +122,35 @@ public class BasicTxText {
         log.info("외부 트랜잭션 커밋");
         assertThatThrownBy(() -> txManager.commit(outer))
                 .isInstanceOf(UnexpectedRollbackException.class);
+    }
+
+    @Test
+    void inner_rollback_requires_new() {
+        log.info("외부 트랜잭션 시작");
+        TransactionStatus outer = txManager.getTransaction(new DefaultTransactionAttribute());
+        log.info("outer.isNewTransaction()={}", outer.isNewTransaction());
+
+        log.info("내부 트랜잭션 시작");
+        DefaultTransactionAttribute definition = new DefaultTransactionAttribute();
+        definition.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW); // 무조건 새로운 트랜잭션 생성
+        // definition.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED); // 기존 트랜잭션에 없으면 생성, 있으면 참여
+        // definition.setPropagationBehavior(TransactionDefinition.PROPAGATION_SUPPORTS); // 기존 트랜잭션이 없으면 진행, 있으면 참여
+        // definition.setPropagationBehavior(TransactionDefinition.PROPAGATION_NOT_SUPPORTED); // 트랜잭션 지원 X
+        // definition.setPropagationBehavior(TransactionDefinition.PROPAGATION_MANDATORY); // 기존 트랜잭션이 없으면 예외, 있으면 참여
+        // definition.setPropagationBehavior(TransactionDefinition.PROPAGATION_NEVER); // 기존 트랜잭션이 없으면 진행, 있으면 예외
+        // definition.setPropagationBehavior(TransactionDefinition.PROPAGATION_NESTED); // 기존 트랜잭션이 없으면 생성, 있으면 중첩 트랜잭션 생성
+
+        TransactionStatus inner = txManager.getTransaction(definition);
+        log.info("inner.isNewTransaction()={}", inner.isNewTransaction());
+        log.info("내부 트랜잭션 롤백");
+        txManager.rollback(inner); //롤백
+
+        log.info("외부 트랜잭션 커밋");
+        txManager.commit(outer); //커밋
+
+        /**
+         * isolation, timeout, readOnly 는 트랜잭션이 처음 시작될 때만 적용된다.
+         */
     }
 
 }
