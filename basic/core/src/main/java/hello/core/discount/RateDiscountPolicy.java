@@ -11,9 +11,9 @@ import org.springframework.stereotype.Component;
 // @Primary
 // @Qualifier("mainDiscountPolicy")
 @MainDiscountPolicy
-public class RateDiscountPolicy implements DiscountPolicy{
-
+public class RateDiscountPolicy implements DiscountPolicy {
   private int discountPercent = 10; // 10% 할인
+
   @Override
   public int discount(Member member, int price) {
     if (member.getGrade() == Grade.VIP) {
