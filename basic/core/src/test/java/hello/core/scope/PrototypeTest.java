@@ -26,8 +26,8 @@ public class PrototypeTest {
     applicationContext.close();
 
     // destroy가 안되기 때문에 수동으로 호출해야 한다.
-    prototypeBean1.destroy();
-    prototypeBean2.destroy();
+    // prototypeBean1.destroy();
+    // prototypeBean2.destroy();
   }
 
   @Scope("prototype")

@@ -57,31 +57,31 @@ public class SingletonWithPrototypeTest {
 
     // DI 컨테이너에서 빈을 탐색 (DL)
     // 2. DL을 이용해서 항상 새로운 프로토타입 빈이 생성되는 것을 확인
-    // @Autowired
-    // private ObjectProvider<PrototypeBean> prototypeBeanProvider;
-    //
-    // public int logic() {
-    //   PrototypeBean prototypeBean = prototypeBeanProvider.getObject();
-    //   prototypeBean.addCount();
-    //   return prototypeBean.getCount();
-    // }
-
-    // 3. 스프링에 의존적이지 않은 JSR-330 Provider 활용
-    // 자바 표준이므로 스프링이 아닌 다른 컨테이너에서도 사용할 수 있다.
     @Autowired
-    private Provider<PrototypeBean> prototypeBeanProvider;
+    private ObjectProvider<PrototypeBean> prototypeBeanProvider;
 
     public int logic() {
-      PrototypeBean prototypeBean = prototypeBeanProvider.get();
+      PrototypeBean prototypeBean = prototypeBeanProvider.getObject();
       prototypeBean.addCount();
       return prototypeBean.getCount();
     }
+
+    // 3. 스프링에 의존적이지 않은 JSR-330 Provider 활용
+    // 자바 표준이므로 스프링이 아닌 다른 컨테이너에서도 사용할 수 있다.
+    // @Autowired
+    // private Provider<PrototypeBean> prototypeBeanProvider;
+    //
+    // public int logic() {
+    //   PrototypeBean prototypeBean = prototypeBeanProvider.get();
+    //   prototypeBean.addCount();
+    //   return prototypeBean.getCount();
+    // }
   }
 
   @Scope("prototype")
   static class PrototypeBean {
 
-    private int count =0;
+    private int count = 0;
 
     public void addCount() {
       count++;

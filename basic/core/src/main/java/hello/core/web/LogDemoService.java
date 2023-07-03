@@ -14,10 +14,10 @@ public class LogDemoService {
   // proxyMode를 이용 할 수 있다.
   private final MyLogger myLogger;
 
-  // private final Provider<MyLogger> myLoggerProvider;
+  // private final ObjectProvider<MyLogger> myLoggerProvider;
 
   public void logic(String id) {
-    // MyLogger myLogger = myLoggerProvider.get();
+    // MyLogger myLogger = myLoggerProvider.getObject();
     myLogger.log("service id : " + id);
   }
 }
